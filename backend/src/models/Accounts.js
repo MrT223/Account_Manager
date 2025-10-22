@@ -13,6 +13,11 @@ const passwordSchema = new mongoose.Schema({
 
 const accountSchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      require: true,
+      trim: true,
+    },
     username: {
       type: String,
       require: true,
@@ -30,6 +35,7 @@ const accountSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 );
 

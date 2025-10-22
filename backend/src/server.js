@@ -12,8 +12,8 @@ const app = express();
 app.use(express.json());
 app.use("/api/account", accountRoutes);
 
-connectDB();
-
-app.listen(PORT, () => {
-  console.log("oke");
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log("Server ok");
+  });
 });
