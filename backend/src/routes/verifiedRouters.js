@@ -1,7 +1,7 @@
 import express from "express";
 import { login, changePin } from "../controllers/verifiedControllers.js";
 
-const router = express.router();
+const router = express.Router();
 
 router.post("/login", login);
 

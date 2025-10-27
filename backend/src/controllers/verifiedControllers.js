@@ -7,7 +7,7 @@ export const createPin = async (req, res) => {
   const pinExist = await Verified.findOne();
   if (!pinExist) {
     await Verified.create({ PIN: DEFAULT_PIN });
-    console.log(`Lan dau dang nhap, da tao ma PIN mac dinh: ${DEFAULTPIN}`);
+    console.log(`Lan dau dang nhap, da tao ma PIN mac dinh: ${DEFAULT_PIN}`);
   }
 };
 
@@ -23,7 +23,9 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: "PIN sai" });
     }
 
-    const token = jwt.sign({ sub: user._id }, JWT_SECRET, { expiresIn: "15m" });
+    const token = jwt.sign({ sub: verified._id }, JWT_SECRET, {
+      expiresIn: "15m",
+    });
     res.json({ token });
   } catch (error) {
     console.error("login failed!", error);
