@@ -49,6 +49,6 @@ export const changePin = async (req, res) => {
     res.json({ message: "Đổi PIN thành công" });
   } catch (error) {
     console.error("changePin failed!", error);
-    res.status(101).json({ message: "Lỗi hệ thống" });
+    res.status(500).json({ message: "Lỗi hệ thống" });
   }
 };
