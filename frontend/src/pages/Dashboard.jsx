@@ -13,7 +13,6 @@ import {
   Trash2,
 } from "lucide-react";
 
-// Helper for API calls with token
 const apiClient = (API_URL) => {
   const token = localStorage.getItem("token");
   return axios.create({

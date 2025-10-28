@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  # Service cho Backend
+  backend:
+    build: ./backend
+    container_name: account-manager-backend
+    restart: unless-stopped
+    env_file: ./.env # Đọc biến môi trường từ file .env ở gốc
+    ports:
+      - "8000:8000" # Mở cổng 8000 của host
+    networks:
+      - account-net
+    volumes:
+      - ./backend:/app/backend # Mount code để dev (tùy chọn)
+      - /app/backend/node_modules # Không mount node_modules từ host
+
+  # Service cho Frontend
+  frontend:
+    build: ./frontend
+    container_name: account-manager-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80" # Truy cập app qua cổng 5173
+    depends_on:
+      - backend
+    networks:
+      - account-net
+    volumes:
+      - ./frontend:/app/frontend # Mount code để dev (tùy chọn)
+      - /app/frontend/node_modules # Không mount node_modules
+
+networks:
+  account-net:
+    driver: bridge

@@ -6,7 +6,7 @@ import "./App.css";
 import axios from "axios";
 
 // Base URL cho API backend
-const API_URL = "http://localhost:8000/api";
+const API_URL = "/api";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
