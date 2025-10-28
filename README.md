@@ -65,7 +65,7 @@ cd ..
 ```
 ### Thiết lập biến môi trường (.env) cho Backend
 
-Tạo file **`.env`** trong thư mục **`backend/`** dựa trên nội dùng file **`.env.example`** trong **backend**. Copy nội dung dưới đây và **thay thế các giá trị placeholder bằng thông tin thực tế của bạn**:
+Tạo file **`.env`** trong thư mục **`backend/`** dựa trên nội dùng file **`.env.example`**. Copy nội dung và **thay thế các giá trị placeholder bằng thông tin thực tế của bạn**:
 
 **backend/.env**
 
