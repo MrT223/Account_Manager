@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Toaster, toast } from "sonner";
-import LoginPage from "./pages/LoginPage.jsx"; // Đã bỏ comment
-import Dashboard from "./pages/Dashboard.jsx"; // Đã bỏ comment
+import LoginPage from "./pages/LoginPage.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 import "./App.css";
-import axios from "axios"; // Thêm import axios
+import axios from "axios";
 
 // Base URL cho API backend
 const API_URL = "http://localhost:8000/api";

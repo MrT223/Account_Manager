@@ -26,12 +26,9 @@ body {
   min-height: 100vh;
 }
 
-/* Kích thước căn chỉnh cho #root (tương tự như App.css cũ) */
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
-
-/* Các styles khác sẽ được xử lý bằng Tailwind classes trong component */
