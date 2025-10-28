@@ -45,9 +45,10 @@
 ## Cài đặt
 
 ### Clone repository (Nếu bạn chưa có)
+``
 git clone <URL_REPOSITORY_CUA_BAN>
 cd <TEN_THU_MUC_DU_AN>
-
+``
 ### Cài đặt dependencies
 
 **Backend**
