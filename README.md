@@ -18,7 +18,7 @@
 - **Database:** MongoDB lưu trữ thông tin PIN (`Verified` model) và tài khoản (`Accounts` model).
 
 ## Tính năng chính
-- Đăng nhập bằng mã PIN (mặc định: 123456) và đổi PIN.
+- Đăng nhập bằng mã PIN (mặc định: `123456`) và đổi PIN.
 - Quản lý danh sách tài khoản: thêm, sửa, xóa.
 - Lưu trữ và hiển thị nhiều thông tin (mật khẩu, mã code, ...) theo nhãn (label) cho từng tài khoản.
 - Phân loại tài khoản theo danh mục (Game, Ngân hàng, Mạng xã hội, Công việc, Khác).
