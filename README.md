@@ -51,15 +51,17 @@ cd <TEN_THU_MUC_DU_AN>
 ### Cài đặt dependencies
 
 **Backend**
+```bash
 cd backend
 npm install
 cd ..
-
+```
 **Frontend**
+```bash
 cd frontend
 npm install
 cd ..
-
+```
 ### Thiết lập biến môi trường (.env) cho Backend
 
 Tạo file **`.env`** trong thư mục **`backend/`**. Copy nội dung dưới đây và **thay thế các giá trị placeholder bằng thông tin thực tế của bạn**:
@@ -91,28 +93,34 @@ DEFAULT_PIN="123456"
 Mở **hai cửa sổ Terminal riêng biệt**.
 
 ### Terminal 1: Chạy Backend
+```bash
 cd backend
 npm run dev
 Server sẽ chạy trên: `http://localhost:8000` (hoặc cổng bạn đặt trong `.env`).
-
+```
 ### Terminal 2: Chạy Frontend
+```
 cd frontend
 npm run dev
 Ứng dụng sẽ chạy trên: `http://localhost:5173`.
 PIN mặc định để đăng nhập lần đầu là: **`123456`**.
-
+```
 ---
 
 ## Production Build (Tùy chọn)
 
 ### Frontend
+```
 cd frontend
 npm run build
+```
 Các tệp tĩnh sẽ được tạo trong thư mục `frontend/dist/`. Bạn cần cấu hình một web server (ví dụ: Nginx) để phục vụ các tệp này và proxy các yêu cầu API đến backend.
 
 ### Backend
+```
 cd backend
 npm start
+```
 Lệnh này chạy server Node.js trực tiếp. Đảm bảo MongoDB đang chạy và file `.env` được cấu hình đúng cho môi trường production.
 
 ---
@@ -158,6 +166,7 @@ Lệnh này chạy server Node.js trực tiếp. Đảm bảo MongoDB đang ch�
 ---
 
 ## Cấu trúc Dự án (Sơ lược)
+```
 <TEN_THU_MUC_GOC>/
 ├── backend/
 │   ├── src/
@@ -182,7 +191,7 @@ Lệnh này chạy server Node.js trực tiếp. Đảm bảo MongoDB đang ch�
 │   ├── postcss.config.js # Cấu hình PostCSS
 │   └── tailwind.config.js# Cấu hình Tailwind
 └── README.md             # File này
-
+```
 ---
 
 ## Troubleshooting
