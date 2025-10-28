@@ -3,10 +3,10 @@ import { login, changePin } from "../controllers/verifiedControllers.js";
 import jwt from "jsonwebtoken";
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middleware kiểm tra token tối giản
 const checkAuth = (req, res, next) => {
+  const JWT_SECRET = process.env.JWT_SECRET;
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) return res.status(401).json({ message: "Không có token" });
 
