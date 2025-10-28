@@ -1,108 +1,69 @@
-# 🔑 Account Manager  
-### _Ứng Dụng Quản Lý Tài Khoản & Mật Khẩu (MERN Stack)_
+# 🔑 Account Manager (Quản Lý Tài Khoản & Mật Khẩu)
+
+## Giới Thiệu
+
+Đây là ứng dụng quản lý tài khoản/mật khẩu sử dụng kiến trúc **MERN Stack** với giao diện hiện đại (Dark Mode) được xây dựng bằng **Tailwind CSS**.
+
+### Yêu Cầu
+
+* **Node.js** (18+)
+* **MongoDB Instance** (Local hoặc Cloud)
 
 ---
 
-## 🧩 Giới Thiệu
+## 🚀 Các Bước Khởi Động Dự Án
 
-**Account Manager** là ứng dụng giúp bạn **lưu trữ, quản lý và bảo vệ mật khẩu/tài khoản cá nhân** một cách an toàn.  
-Dự án được phát triển với **MERN Stack (MongoDB, Express.js, React, Node.js)** và giao diện hiện đại **Dark Mode** sử dụng **Tailwind CSS**.
+Ứng dụng yêu cầu chạy đồng thời Backend và Frontend.
 
----
+### 1. Thiết Lập Backend (API & Database)
 
-## ⚙️ Yêu Cầu Hệ Thống
+#### Bước 1: Cài đặt Dependencies
 
-| Thành phần | Yêu cầu tối thiểu |
-|-------------|------------------|
-| **Node.js** | 18+ |
-| **MongoDB** | Local hoặc Cloud Instance |
-
----
-
-## 🚀 Hướng Dẫn Khởi Động Dự Án
-
-Ứng dụng bao gồm **2 phần**: `backend/` (API & Database) và `frontend/` (React UI).  
-Hãy đảm bảo bạn chạy **song song** cả hai phần này.
-
----
-
-### 🖥️ 1. Thiết Lập Backend (API & Database)
-
-#### 📍 Bước 1: Cài đặt Dependencies
+Mở Terminal và điều hướng đến thư mục `backend/`:
 
 ```bash
 cd backend
 npm install
-⚙️ Bước 2: Cấu hình biến môi trường
-Tạo file .env trong thư mục backend/ và thêm nội dung sau (thay giá trị placeholder cho phù hợp):
+Bước 2: Cấu hình Biến Môi Trường (.env)
+Tạo một tệp có tên .env trong thư mục backend/ và dán nội dung sau. Hãy thay thế các giá trị placeholder:
 
-bash
-Sao chép mã
+Đoạn mã
+
 # backend/.env
 
-# 🔗 Chuỗi kết nối MongoDB (BẮT BUỘC)
+# Chuỗi kết nối MongoDB (BẮT BUỘC)
 MONGODB_CONNECTIONSTRING="mongodb://<user>:<password>@<host>:<port>/<db_name>"
 
-# 🔒 Khóa bí mật JWT (BẮT BUỘC - thay bằng chuỗi ngẫu nhiên mạnh)
+# Khóa bí mật JWT (BẮT BUỘC - Thay bằng chuỗi ngẫu nhiên dài)
 JWT_SECRET="your-strong-secret-key-for-jwt"
 
-# 🔢 Mã PIN mặc định khi khởi tạo DB
-DEFAULT_PIN="123456"
-▶️ Bước 3: Khởi chạy Server
-bash
-Sao chép mã
-npm run dev
-🌐 Server chạy tại: http://localhost:8000
+# Mã PIN mặc định cho lần đầu khởi động DB (Giá trị mặc định là 123456)
+DEFAULT_PIN="123456" 
+Bước 3: Khởi chạy Server
+Trong thư mục backend/, chạy:
 
-💻 2. Thiết Lập Frontend (React App)
-📍 Bước 1: Cài đặt Dependencies
-bash
-Sao chép mã
+Bash
+
+npm run dev
+# Server sẽ chạy tại: http://localhost:8000
+2. Thiết Lập Frontend (React App)
+Bước 1: Cài đặt Dependencies (bao gồm Tailwind)
+Mở Terminal mới và điều hướng đến thư mục frontend/:
+
+Bash
+
 cd frontend
 npm install
-Bao gồm cả Tailwind CSS và các thư viện hỗ trợ giao diện hiện đại.
+Bước 2: Khởi chạy Client
+Trong thư mục frontend/, chạy:
 
-▶️ Bước 2: Khởi chạy Client
-bash
-Sao chép mã
+Bash
+
 npm run dev
-🌐 Ứng dụng chạy tại: http://localhost:5173
+# Ứng dụng sẽ chạy tại: http://localhost:5173
+🔒 Hướng Dẫn Đăng Nhập
+Truy cập URL: http://localhost:5173.
 
-🔐 Hướng Dẫn Đăng Nhập
-Mở trình duyệt và truy cập:
-👉 http://localhost:5173
+Sử dụng PIN mặc định để đăng nhập lần đầu: 123456.
 
-Nhập PIN mặc định:
-
-Sao chép mã
-123456
-Sau khi đăng nhập thành công, truy cập mục “Đổi PIN” để cập nhật mã bảo mật mới nhằm đảm bảo an toàn dữ liệu.
-
-🧱 Cấu Trúc Dự Án (Tóm Lược)
-lua
-Sao chép mã
-Account-Manager/
-│
-├── backend/
-│   ├── src/
-│   ├── .env
-│   ├── package.json
-│   └── ...
-│
-├── frontend/
-│   ├── src/
-│   ├── tailwind.config.js
-│   ├── vite.config.ts
-│   ├── package.json
-│   └── ...
-│
-└── README.md
-📜 Giấy Phép
-Dự án được phát hành dưới giấy phép MIT License – bạn có thể tự do sử dụng, chỉnh sửa và phân phối.
-
-💬 Liên Hệ & Đóng Góp
-Nếu bạn muốn đóng góp hoặc báo lỗi, hãy mở Issue hoặc gửi Pull Request trên GitHub Repository của dự án.
-Mọi ý kiến đóng góp đều được hoan nghênh! 🙌
-
-css
-Sao chép mã
+Khuyến cáo: Sau khi đăng nhập, hãy vào mục Đổi PIN để thiết lập mã PIN mới vì lý do bảo mật.
