@@ -68,22 +68,22 @@ Tạo file **`.env`** trong thư mục **`backend/`**. Copy nội dung dưới �
 
 # backend/.env
 
-# Chuỗi kết nối MongoDB (BẮT BUỘC - Thay thế bằng chuỗi kết nối của bạn)
+**Chuỗi kết nối MongoDB (BẮT BUỘC - Thay thế bằng chuỗi kết nối của bạn)**
 MONGODB_CONNECTIONSTRING="mongodb://localhost:27017/account_manager_db"
 
-# Khóa bí mật JWT (BẮT BUỘC - Thay bằng một chuỗi ngẫu nhiên, dài và bảo mật)
+**Khóa bí mật JWT (BẮT BUỘC - Thay bằng một chuỗi ngẫu nhiên, dài và bảo mật)**
 JWT_SECRET="your-super-strong-and-random-secret-key-for-jwt"
 
-# Mã PIN mặc định cho lần đầu khởi động DB (Có thể giữ nguyên hoặc thay đổi)
+**Mã PIN mặc định cho lần đầu khởi động DB (Có thể giữ nguyên hoặc thay đổi)**
 DEFAULT_PIN="123456"
 
-# Cổng cho server backend (Tùy chọn, mặc định là 8000 nếu không có)
-# PORT=8000
+**Cổng cho server backend (Tùy chọn, mặc định là 8000 nếu không có)**
+PORT=8000
 
 > **Quan trọng:** Không commit file `.env` vào Git. Đảm bảo file `.gitignore` trong thư mục `backend/` có dòng `.env`.
 
-### Khởi tạo MongoDB
-- Đảm bảo MongoDB server đang chạy (local hoặc trên cloud).
+# Khởi tạo MongoDB
+- Đảm bảo MongoDB server đang chạy (local).
 - Backend sẽ tự động tạo database và collection khi khởi động nếu chưa tồn tại.
 
 ---
