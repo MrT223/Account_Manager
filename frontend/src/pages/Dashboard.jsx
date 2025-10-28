@@ -10,6 +10,7 @@ import {
   Eye,
   EyeOff,
   X,
+  Trash2,
 } from "lucide-react";
 
 // Helper for API calls with token
@@ -25,9 +26,12 @@ const apiClient = (API_URL) => {
 
 // --- Component Modal ---
 const Modal = ({ children, onClose }) => (
-  <div style={modalStyles.overlay}>
-    <div style={modalStyles.content}>
-      <button onClick={onClose} style={modalStyles.closeButton}>
+  <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div className="bg-gray-800 p-6 sm:p-8 rounded-xl shadow-2xl relative w-full max-w-lg max-h-[90vh] overflow-y-auto transform transition-all duration-300">
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 text-gray-400 hover:text-white transition duration-200 p-2 rounded-full hover:bg-gray-700"
+      >
         <X size={20} />
       </button>
       {children}
@@ -61,7 +65,10 @@ const AccountForm = ({ account, onSave, onCancel, API_URL }) => {
   const addPassword = () => {
     setFormData({
       ...formData,
-      password: [...formData.password, { label: "Nhãn mới", password: "" }],
+      password: [
+        ...formData.password,
+        { label: `Mật khẩu ${formData.password.length + 1}`, password: "" },
+      ],
     });
   };
 
@@ -97,36 +104,47 @@ const AccountForm = ({ account, onSave, onCancel, API_URL }) => {
   const categories = ["Game", "Ngân hàng", "Mạng xã hội", "Công việc", "Khác"];
 
   return (
-    <div style={formStyles.container}>
-      <h2>{isEdit ? "Chỉnh sửa Tài khoản" : "Thêm Tài khoản Mới"}</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={formStyles.group}>
-          <label>Tên tài khoản</label>
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold text-white text-center">
+        {isEdit ? "Chỉnh sửa Tài khoản" : "Thêm Tài khoản Mới"}
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-300">
+            Tên tài khoản
+          </label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
+            className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-900 text-white focus:ring-purple-500 focus:border-purple-500 transition duration-150"
           />
         </div>
-        <div style={formStyles.group}>
-          <label>Tên đăng nhập / Email</label>
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-300">
+            Tên đăng nhập / Email
+          </label>
           <input
             type="text"
             name="username"
             value={formData.username}
             onChange={handleChange}
             required
+            className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-900 text-white focus:ring-purple-500 focus:border-purple-500 transition duration-150"
           />
         </div>
-        <div style={formStyles.group}>
-          <label>Danh mục</label>
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-300">
+            Danh mục
+          </label>
           <select
             name="category"
             value={formData.category}
             onChange={handleChange}
             required
+            className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-900 text-white focus:ring-purple-500 focus:border-purple-500 transition duration-150"
           >
             {categories.map((cat) => (
               <option key={cat} value={cat}>
@@ -136,56 +154,75 @@ const AccountForm = ({ account, onSave, onCancel, API_URL }) => {
           </select>
         </div>
 
-        <h3>Mật khẩu:</h3>
-        {formData.password.map((pass, index) => (
-          <div key={index} style={formStyles.passwordGroup}>
-            <input
-              type="text"
-              name="label"
-              placeholder="Nhãn (ví dụ: Mật khẩu, Code)"
-              value={pass.label}
-              onChange={(e) => handlePasswordChange(index, e)}
-              required
-              style={formStyles.passwordLabel}
-            />
-            <input
-              type="text" // Dùng type="text" để đơn giản hóa việc copy, sẽ hiển thị cleartext trong form
-              name="password"
-              placeholder="Giá trị Mật khẩu"
-              value={pass.password}
-              onChange={(e) => handlePasswordChange(index, e)}
-              required
-              style={formStyles.passwordValue}
-            />
-            {formData.password.length > 1 && (
-              <button
-                type="button"
-                onClick={() => removePassword(index)}
-                style={formStyles.removeButton}
-              >
-                <X size={16} />
-              </button>
-            )}
-          </div>
-        ))}
+        <h3 className="text-xl font-medium text-white pt-4 border-t border-gray-700">
+          Thông tin chi tiết:
+        </h3>
+        <div className="space-y-3">
+          {formData.password.map((pass, index) => (
+            <div
+              key={index}
+              className="flex flex-wrap sm:flex-nowrap gap-2 items-center"
+            >
+              <input
+                type="text"
+                name="label"
+                placeholder="Nhãn (ví dụ: Mật khẩu, Code)"
+                value={pass.label}
+                onChange={(e) => handlePasswordChange(index, e)}
+                required
+                className="w-full sm:w-1/3 px-3 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-purple-500 focus:border-purple-500 transition"
+              />
+              <input
+                type="text"
+                name="password"
+                placeholder="Giá trị Mật khẩu"
+                value={pass.password}
+                onChange={(e) => handlePasswordChange(index, e)}
+                required
+                className="w-full sm:flex-1 px-3 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-purple-500 focus:border-purple-500 transition"
+              />
+              {formData.password.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => removePassword(index)}
+                  className="bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition duration-200 flex items-center w-full sm:w-auto justify-center"
+                  title="Xóa trường này"
+                  disabled={loading}
+                >
+                  <Trash2 size={16} />
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+
         <button
           type="button"
           onClick={addPassword}
-          style={formStyles.addButton}
+          className="bg-gray-700 hover:bg-gray-600 text-purple-400 py-2 px-4 border border-gray-600 rounded-lg transition duration-200 flex items-center justify-center gap-2 w-full font-medium"
+          disabled={loading}
         >
-          Thêm Mật khẩu Khác <PlusCircle size={16} />
+          Thêm Trường Khác <PlusCircle size={16} />
         </button>
 
-        <div style={formStyles.actionGroup}>
+        <div className="flex justify-end gap-3 pt-6 border-t border-gray-700 mt-6">
           <button
             type="button"
             onClick={onCancel}
             disabled={loading}
-            style={{ ...formStyles.button, backgroundColor: "#444" }}
+            className="px-5 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-semibold transition duration-200"
           >
             Hủy
           </button>
-          <button type="submit" disabled={loading} style={formStyles.button}>
+          <button
+            type="submit"
+            disabled={loading}
+            className={`px-5 py-2 rounded-lg text-white font-semibold transition duration-200 ${
+              loading
+                ? "bg-purple-700 cursor-not-allowed"
+                : "bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+            }`}
+          >
             {loading
               ? "Đang lưu..."
               : isEdit
@@ -226,39 +263,53 @@ const PinForm = ({ API_URL, onCancel }) => {
   };
 
   return (
-    <div style={formStyles.container}>
-      <h2>Đổi Mã PIN</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={formStyles.group}>
-          <label>Mã PIN cũ</label>
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold text-white text-center">Đổi Mã PIN</h2>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-300">
+            Mã PIN cũ
+          </label>
           <input
             type="password"
             value={oldPin}
             onChange={(e) => setOldPin(e.target.value)}
             required
             minLength="6"
+            className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-900 text-white focus:ring-purple-500 focus:border-purple-500 transition duration-150"
           />
         </div>
-        <div style={formStyles.group}>
-          <label>Mã PIN mới</label>
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-300">
+            Mã PIN mới
+          </label>
           <input
             type="password"
             value={newPin}
             onChange={(e) => setNewPin(e.target.value)}
             required
             minLength="6"
+            className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-900 text-white focus:ring-purple-500 focus:border-purple-500 transition duration-150"
           />
         </div>
-        <div style={formStyles.actionGroup}>
+        <div className="flex justify-end gap-3 pt-4 border-t border-gray-700 mt-6">
           <button
             type="button"
             onClick={onCancel}
             disabled={loading}
-            style={{ ...formStyles.button, backgroundColor: "#444" }}
+            className="px-5 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-semibold transition duration-200"
           >
             Hủy
           </button>
-          <button type="submit" disabled={loading} style={formStyles.button}>
+          <button
+            type="submit"
+            disabled={loading}
+            className={`px-5 py-2 rounded-lg text-white font-semibold transition duration-200 ${
+              loading
+                ? "bg-purple-700 cursor-not-allowed"
+                : "bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+            }`}
+          >
             {loading ? "Đang đổi..." : "Xác nhận Đổi PIN"}
           </button>
         </div>
@@ -281,57 +332,89 @@ const AccountCard = ({ account, onEdit, onDelete }) => {
   };
 
   return (
-    <div style={cardStyles.card}>
-      <div style={cardStyles.header}>
-        <h3 style={cardStyles.title}>{account.name}</h3>
-        <span style={cardStyles.category}>{account.category}</span>
-      </div>
-      <p style={cardStyles.detail}>
-        <strong style={{ minWidth: "120px", display: "inline-block" }}>
-          Tên đăng nhập:
-        </strong>{" "}
-        {account.username}
-      </p>
+    <div className="bg-gray-800 border border-gray-700 p-6 rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:border-purple-500 flex flex-col justify-between">
+      <div className="mb-4">
+        <div className="flex justify-between items-start border-b border-gray-700 pb-3 mb-3">
+          <h3 className="text-xl font-bold text-white truncate mr-4">
+            {account.name}
+          </h3>
+          <span className="text-xs font-medium text-purple-400 bg-purple-900/30 px-3 py-1 rounded-full flex-shrink-0">
+            {account.category}
+          </span>
+        </div>
 
-      <div style={cardStyles.passwordsSection}>
+        {/* Trường Tên đăng nhập: Đảm bảo không bị xuống hàng và nội dung hiển thị đủ */}
+        <div className="text-base text-gray-400 mb-4 flex flex-col sm:flex-row items-start sm:items-center">
+          {/* Label (luôn chiếm đủ không gian cần thiết, không wrap) */}
+          <strong className="text-gray-300 w-full sm:w-1/3 flex-shrink-0 font-medium text-left mb-1 sm:mb-0">
+            Tên đăng nhập:
+          </strong>{" "}
+          {/* Nội dung (wrap nếu cần, không bị truncate) */}
+          <span className="ml-0 sm:ml-2 flex-grow text-left text-white break-all bg-gray-900/50 px-3 py-1 rounded-lg w-full">
+            {account.username}
+          </span>
+        </div>
+      </div>
+
+      <div className="space-y-4 p-4 bg-gray-900/50 rounded-lg border border-dashed border-gray-700 flex-grow">
+        <p className="text-lg font-bold text-gray-300 text-center border-b border-gray-700 pb-2">
+          Thông tin chi tiết
+        </p>
+
         {account.password.map((pass, index) => (
-          <div key={index} style={cardStyles.passwordRow}>
-            <strong style={{ minWidth: "120px", display: "inline-block" }}>
+          <div key={index} className="flex items-start gap-2 text-sm flex-wrap">
+            {/* Label của mật khẩu */}
+            <strong className="text-gray-400 w-[70px] flex-shrink-0 font-normal text-left pt-2">
               {pass.label}:
             </strong>
-            <input
-              type={showPasswords[index] ? "text" : "password"}
-              value={pass.password}
-              readOnly
-              style={cardStyles.passwordInput}
-            />
-            <button
-              onClick={() => togglePassword(index)}
-              title={showPasswords[index] ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
-              style={cardStyles.iconButton}
-            >
-              {showPasswords[index] ? <EyeOff size={16} /> : <Eye size={16} />}
-            </button>
-            <button
-              onClick={() => copyToClipboard(pass.password, pass.label)}
-              title="Sao chép mật khẩu"
-              style={cardStyles.iconButton}
-            >
-              <Copy size={16} />
-            </button>
+
+            {/* Input mật khẩu */}
+            <div className="flex-1 min-w-[100px] pt-1">
+              <input
+                type={showPasswords[index] ? "text" : "password"}
+                value={pass.password}
+                readOnly
+                className="w-full px-3 py-1 border border-gray-600 rounded-lg bg-gray-800 text-white select-all focus:outline-none break-all"
+              />
+            </div>
+
+            {/* Nút chức năng */}
+            <div className="flex gap-2 flex-shrink-0 pt-1">
+              <button
+                onClick={() => togglePassword(index)}
+                title={showPasswords[index] ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+                className="p-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition duration-150 flex items-center"
+              >
+                {showPasswords[index] ? (
+                  <EyeOff size={16} />
+                ) : (
+                  <Eye size={16} />
+                )}
+              </button>
+              <button
+                onClick={() => copyToClipboard(pass.password, pass.label)}
+                title="Sao chép mật khẩu"
+                className="p-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition duration-150 flex items-center"
+              >
+                <Copy size={16} />
+              </button>
+            </div>
           </div>
         ))}
       </div>
 
-      <div style={cardStyles.actions}>
-        <button onClick={() => onEdit(account)} style={cardStyles.editButton}>
+      <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-gray-700">
+        <button
+          onClick={() => onEdit(account)}
+          className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-lg transition duration-150 flex items-center gap-1 text-sm shadow-md"
+        >
           Sửa
         </button>
         <button
           onClick={() => onDelete(account._id, account.name)}
-          style={cardStyles.deleteButton}
+          className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition duration-150 flex items-center gap-1 text-sm shadow-md"
         >
-          Xóa
+          <Trash2 size={16} /> Xóa
         </button>
       </div>
     </div>
@@ -401,24 +484,26 @@ const Dashboard = ({ onLogout, API_URL }) => {
 
   if (loading && accounts.length === 0) {
     return (
-      <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <div className="text-center mt-12 text-lg text-gray-400">
         Đang tải danh sách tài khoản...
       </div>
     );
   }
 
   return (
-    <div style={dashboardStyles.container}>
-      <div style={dashboardStyles.header}>
-        <h1>Trang Quản lý Mật khẩu</h1>
-        <div style={dashboardStyles.actions}>
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto text-left">
+      <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 pb-4 border-b border-gray-700">
+        <h1 className="text-3xl font-extrabold text-white mb-4 md:mb-0">
+          Trang Quản lý Mật khẩu
+        </h1>
+        <div className="flex flex-wrap gap-3">
           <button
             onClick={() => {
               setShowModal(true);
               setIsPinModal(false);
               setEditingAccount(null);
             }}
-            style={dashboardStyles.addButton}
+            className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg shadow-md transition duration-200"
           >
             <PlusCircle size={20} /> Thêm Tài khoản
           </button>
@@ -427,28 +512,32 @@ const Dashboard = ({ onLogout, API_URL }) => {
               setShowModal(true);
               setIsPinModal(true);
             }}
-            style={dashboardStyles.pinButton}
+            className="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-lg shadow-md transition duration-200"
           >
             <Settings size={20} /> Đổi PIN
           </button>
-          <button onClick={onLogout} style={dashboardStyles.logoutButton}>
+          <button
+            onClick={onLogout}
+            className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200"
+          >
             <LogOut size={20} /> Đăng xuất
           </button>
         </div>
-      </div>
+      </header>
 
-      <div style={dashboardStyles.searchBar}>
-        <Search size={20} style={{ marginRight: "10px", minWidth: "20px" }} />
+      <div className="flex items-center mb-8 p-3 border border-gray-700 rounded-xl bg-gray-900 shadow-xl">
+        <Search size={20} className="text-purple-400 mr-3 flex-shrink-0" />
         <input
           type="text"
           placeholder="Tìm kiếm theo Tên, Username hoặc Danh mục..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={dashboardStyles.searchInput}
+          className="flex-grow bg-transparent text-white placeholder-gray-400 outline-none text-base"
         />
       </div>
 
-      <div style={dashboardStyles.list}>
+      {/* Điều chỉnh Grid để tăng chiều ngang thẻ */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredAccounts.length > 0 ? (
           filteredAccounts.map((account) => (
             <AccountCard
@@ -459,7 +548,7 @@ const Dashboard = ({ onLogout, API_URL }) => {
             />
           ))
         ) : (
-          <p style={{ gridColumn: "1 / -1", textAlign: "center" }}>
+          <p className="col-span-full text-center text-lg text-gray-500 py-12 border border-dashed border-gray-700 rounded-xl bg-gray-800">
             Không tìm thấy tài khoản nào.
           </p>
         )}
@@ -481,263 +570,6 @@ const Dashboard = ({ onLogout, API_URL }) => {
       )}
     </div>
   );
-};
-
-// --- STYLES (Đơn giản hóa cho mục đích triển khai nhanh) ---
-
-const dashboardStyles = {
-  container: {
-    padding: "20px",
-    maxWidth: "1200px",
-    margin: "0 auto",
-    textAlign: "left",
-  },
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexWrap: "wrap",
-    marginBottom: "20px",
-  },
-  actions: { display: "flex", gap: "10px", flexWrap: "wrap" },
-  addButton: {
-    backgroundColor: "#4CAF50",
-    color: "white",
-    padding: "10px 15px",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    gap: "5px",
-  },
-  pinButton: {
-    backgroundColor: "#2196F3",
-    color: "white",
-    padding: "10px 15px",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    gap: "5px",
-  },
-  logoutButton: {
-    backgroundColor: "#f44336",
-    color: "white",
-    padding: "10px 15px",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    gap: "5px",
-  },
-  searchBar: {
-    display: "flex",
-    alignItems: "center",
-    marginBottom: "20px",
-    padding: "10px",
-    border: "1px solid #ddd",
-    borderRadius: "4px",
-    backgroundColor: "#333",
-  },
-  searchInput: {
-    flexGrow: 1,
-    padding: "5px",
-    border: "none",
-    outline: "none",
-    fontSize: "1em",
-    backgroundColor: "inherit",
-    color: "inherit",
-  },
-  list: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-    gap: "20px",
-  },
-};
-
-const cardStyles = {
-  card: {
-    border: "1px solid #444",
-    padding: "20px",
-    borderRadius: "8px",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.3)",
-    backgroundColor: "#333",
-  },
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderBottom: "1px solid #555",
-    paddingBottom: "10px",
-    marginBottom: "10px",
-  },
-  title: { margin: 0, fontSize: "1.2em" },
-  category: {
-    fontSize: "0.8em",
-    padding: "5px 10px",
-    borderRadius: "4px",
-    backgroundColor: "#555",
-  },
-  detail: { marginBottom: "10px" },
-  passwordsSection: {
-    marginTop: "15px",
-    padding: "10px",
-    border: "1px dashed #555",
-    borderRadius: "4px",
-  },
-  passwordRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "5px",
-    marginBottom: "5px",
-    flexWrap: "wrap",
-  },
-  passwordInput: {
-    flexGrow: 1,
-    padding: "8px",
-    border: "1px solid #555",
-    borderRadius: "4px",
-    backgroundColor: "#222",
-    color: "white",
-    flex: "1 1 100px",
-  },
-  iconButton: {
-    background: "#1a1a1a",
-    border: "1px solid #646cff",
-    borderRadius: "4px",
-    cursor: "pointer",
-    padding: "8px",
-    color: "#646cff",
-    display: "flex",
-    alignItems: "center",
-  },
-  actions: {
-    display: "flex",
-    justifyContent: "flex-end",
-    gap: "10px",
-    marginTop: "15px",
-  },
-  editButton: {
-    backgroundColor: "#FFC107",
-    color: "black",
-    border: "none",
-    padding: "8px 12px",
-    borderRadius: "4px",
-    cursor: "pointer",
-  },
-  deleteButton: {
-    backgroundColor: "#E53935",
-    color: "white",
-    border: "none",
-    padding: "8px 12px",
-    borderRadius: "4px",
-    cursor: "pointer",
-  },
-};
-
-const modalStyles = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1000,
-  },
-  content: {
-    backgroundColor: "#242424",
-    padding: "30px",
-    borderRadius: "8px",
-    position: "relative",
-    width: "90%",
-    maxWidth: "500px",
-    maxHeight: "90vh",
-    overflowY: "auto",
-  },
-  closeButton: {
-    position: "absolute",
-    top: "10px",
-    right: "10px",
-    background: "none",
-    border: "none",
-    color: "#ccc",
-    cursor: "pointer",
-  },
-};
-
-const formStyles = {
-  container: { padding: "10px" },
-  group: { marginBottom: "15px" },
-  passwordGroup: {
-    display: "flex",
-    gap: "10px",
-    alignItems: "center",
-    marginBottom: "10px",
-    flexWrap: "wrap",
-  },
-  passwordLabel: {
-    width: "30%",
-    minWidth: "100px",
-    padding: "8px",
-    border: "1px solid #555",
-    borderRadius: "4px",
-    backgroundColor: "#222",
-    color: "white",
-  },
-  passwordValue: {
-    flex: 1,
-    padding: "8px",
-    border: "1px solid #555",
-    borderRadius: "4px",
-    backgroundColor: "#222",
-    color: "white",
-    minWidth: "100px",
-  },
-  removeButton: {
-    background: "#f44336",
-    color: "white",
-    border: "none",
-    borderRadius: "4px",
-    padding: "8px",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-  },
-  addButton: {
-    backgroundColor: "#444",
-    color: "white",
-    padding: "10px 15px",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    gap: "5px",
-    width: "100%",
-    justifyContent: "center",
-    marginTop: "10px",
-  },
-  actionGroup: {
-    display: "flex",
-    justifyContent: "flex-end",
-    gap: "10px",
-    marginTop: "20px",
-  },
-  button: {
-    padding: "10px 20px",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-    color: "white",
-    backgroundColor: "#646cff",
-  },
 };
 
 export default Dashboard;
