@@ -106,9 +106,9 @@ Server sẽ chạy trên: `http://localhost:8000` (hoặc cổng bạn đặt tr
 ```
 cd frontend
 npm run dev
+```
 Ứng dụng sẽ chạy trên: `http://localhost:5173`.
 PIN mặc định để đăng nhập lần đầu là: **`123456`**.
-```
 ---
 
 ## Production Build (Tùy chọn)
@@ -152,20 +152,6 @@ Lệnh này chạy server Node.js trực tiếp. Đảm bảo MongoDB đang ch�
 | PUT    | `/:id`   | Cập nhật tài khoản       | `{ name, username, category, password: [...] }` | Yes           |
 | DELETE | `/:id`   | Xóa tài khoản            | `id` (path param)                                | Yes           |
 
-**Cấu trúc dữ liệu Account (Mongoose Schema)**
-``
-{
-  name: String,       // Tên gợi nhớ cho tài khoản
-  username: String,   // Tên đăng nhập hoặc email
-  category: String,   // Danh mục: "Game", "Ngân hàng", "Mạng xã hội", "Công việc", "Khác"
-  password: [         // Mảng chứa các thông tin chi tiết
-    {
-      label: String,  // Nhãn (ví dụ: "Mật khẩu chính", "PIN", "Mã 2FA")
-      password: String // Giá trị tương ứng
-    }
-  ]
-}
-``
 **Xử lý lỗi:** API trả về `{ message: string }` cùng với status code HTTP phù hợp (ví dụ: 400, 401, 404, 500).
 
 ---
