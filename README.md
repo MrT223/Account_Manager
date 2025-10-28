@@ -153,6 +153,7 @@ Lệnh này chạy server Node.js trực tiếp. Đảm bảo MongoDB đang ch�
 | DELETE | `/:id`   | Xóa tài khoản            | `id` (path param)                                | Yes           |
 
 **Cấu trúc dữ liệu Account (Mongoose Schema)**
+``
 {
   name: String,       // Tên gợi nhớ cho tài khoản
   username: String,   // Tên đăng nhập hoặc email
@@ -164,7 +165,7 @@ Lệnh này chạy server Node.js trực tiếp. Đảm bảo MongoDB đang ch�
     }
   ]
 }
-
+``
 **Xử lý lỗi:** API trả về `{ message: string }` cùng với status code HTTP phù hợp (ví dụ: 400, 401, 404, 500).
 
 ---
