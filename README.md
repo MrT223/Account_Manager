@@ -46,7 +46,7 @@
 
 ### Clone repository (Nếu bạn chưa có)
 ```
-git clone <URL_REPOSITORY_CUA_BAN>
+git clone https://github.com/MrT223/Account_Manager.git
 cd <TEN_THU_MUC_DU_AN>
 ```
 ### Cài đặt dependencies
