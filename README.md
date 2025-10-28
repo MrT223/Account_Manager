@@ -7,7 +7,7 @@
 ### Yêu Cầu
 
 * **Node.js** (18+)
-* **MongoDB Instance** (Local hoặc Cloud)
+* **MongoDB Instance** (Local)
 
 ---
 
