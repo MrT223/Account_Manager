@@ -123,21 +123,29 @@ PIN mặc định để đăng nhập lần đầu là: **`123456`**.
 │   │   ├── models/       # Schemas (Accounts.js, Verified.js)
 │   │   ├── routes/       # API Endpoints (accountRouters.js, verifiedRouters.js)
 │   │   └── server.js     # Khởi tạo Express, middlewares
-│   ├── .env              # Biến môi trường (KHÔNG COMMIT)
+│   ├── .dockerignore     # Bỏ qua file khi build Docker
+│   ├── .env.example      # File .env mẫu cho backend
 │   ├── .gitignore
+│   ├── Dockerfile        # Cấu hình Docker cho backend (Node.js)
 │   └── package.json
 ├── frontend/
 │   ├── src/
 │   │   ├── pages/        # Components chính (LoginPage.jsx, Dashboard.jsx)
-│   │   ├── App.jsx       # Routing & Auth logic
+│   │   ├── App.jsx       # Logic Auth & component chính
 │   │   ├── index.css     # CSS gốc & Tailwind directives
 │   │   └── main.jsx      # Điểm vào React app
 │   ├── public/           # Tài nguyên tĩnh (favicon, ...)
+│   ├── .dockerignore
 │   ├── .gitignore
+│   ├── Dockerfile        # Cấu hình Docker (build React + Nginx)
 │   ├── index.html
+│   ├── nginx.conf        # Cấu hình Nginx reverse proxy cho API
 │   ├── package.json
 │   ├── postcss.config.js # Cấu hình PostCSS
 │   └── tailwind.config.js# Cấu hình Tailwind
+├── .env.example          # Biến môi trường mẫu cho Docker Compose
+├── .gitignore
+├── docker-compose.yml    # Định nghĩa services (backend, frontend)
 └── README.md             # File này
 ```
 ---
