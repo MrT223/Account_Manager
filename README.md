@@ -49,30 +49,13 @@
 git clone https://github.com/MrT223/Account_Manager.git
 cd <TEN_THU_MUC_DU_AN>
 ```
-### Cài đặt dependencies
 
-**Backend**
-```bash
-cd backend
-npm install
-cd ..
-```
-**Frontend**
-```bash
-cd frontend
-npm install
-cd ..
-```
 ### Thiết lập biến môi trường (.env) cho Backend
 
 Tạo file **`.env`** trong thư mục **`backend/`** dựa trên nội dùng file **`.env.example`**. Copy nội dung và **thay thế các giá trị placeholder bằng thông tin thực tế của bạn**:
 
 **backend/.env**
 
-**Chuỗi kết nối MongoDB (BẮT BUỘC - Thay thế bằng chuỗi kết nối của bạn)**
-```
-MONGODB_CONNECTIONSTRING="mongodb://localhost:27017/account_manager_db"
-```
 **Khóa bí mật JWT (BẮT BUỘC - Thay bằng một chuỗi ngẫu nhiên, dài và bảo mật)**
 ```
 JWT_SECRET="your-super-strong-and-random-secret-key-for-jwt"
@@ -85,49 +68,21 @@ DEFAULT_PIN="123456"
 ```
 PORT=8000
 ```
+
+### Cài đặt dependencies
+**Chạy lệnh docker khởi tạo**
+```
+docker-compose up -d --build
+```
+**Dừng server:**
+```
+docker-compose down
+```
+
 > **Quan trọng:** Không commit file `.env` vào Git. Đảm bảo file `.gitignore` trong thư mục `backend/` có dòng `.env`.
 
-# Khởi tạo MongoDB
-- Đảm bảo MongoDB server đang chạy (local).
-- Backend sẽ tự động tạo database và collection khi khởi động nếu chưa tồn tại.
-
----
-
-## Chạy Local (Development)
-
-Mở **hai cửa sổ Terminal riêng biệt**.
-
-### Terminal 1: Chạy Backend
-```bash
-cd backend
-npm run dev
-Server sẽ chạy trên: `http://localhost:8000` (hoặc cổng bạn đặt trong `.env`).
-```
-### Terminal 2: Chạy Frontend
-```
-cd frontend
-npm run dev
-```
 Ứng dụng sẽ chạy trên: `http://localhost:5173`.
 PIN mặc định để đăng nhập lần đầu là: **`123456`**.
----
-
-## Production Build (Tùy chọn)
-
-### Frontend
-```
-cd frontend
-npm run build
-```
-Các tệp tĩnh sẽ được tạo trong thư mục `frontend/dist/`. Bạn cần cấu hình một web server (ví dụ: Nginx) để phục vụ các tệp này và proxy các yêu cầu API đến backend.
-
-### Backend
-```
-cd backend
-npm start
-```
-Lệnh này chạy server Node.js trực tiếp. Đảm bảo MongoDB đang chạy và file `.env` được cấu hình đúng cho môi trường production.
-
 ---
 
 ## API Endpoints (Tham khảo)
