@@ -71,9 +71,13 @@ PORT=8000
 ```
 
 ### Cài đặt dependencies
-**Chạy lệnh docker khởi tạo**
+**Dùng lệnh docker khởi tạo và chạy lần đầu tiên**
 ```
 docker-compose up -d --build
+```
+**Chạy lệnh docker khởi tạo các lần sau**
+```
+docker-compose up
 ```
 **Dừng server:**
 ```
