@@ -52,9 +52,10 @@ cd <TEN_THU_MUC_DU_AN>
 
 ### Thiết lập biến môi trường (.env) cho Backend
 
-Tạo file **`.env`** trong thư mục **`backend/`** dựa trên nội dùng file **`.env.example`**. Copy nội dung và **thay thế các giá trị placeholder bằng thông tin thực tế của bạn**:
+Tạo file **`.env`** trong thư mục **`backend/`** dựa trên nội dung file **`.env.example`**.
+Tạo file **`.env`** trong thư mục gốc dựa trên nội dung file **`.env.example`** ở thư mục gốc.
 
-**backend/.env**
+**thay thế các giá trị placeholder bằng thông tin thực tế của bạn**:
 
 **Khóa bí mật JWT (BẮT BUỘC - Thay bằng một chuỗi ngẫu nhiên, dài và bảo mật)**
 ```
